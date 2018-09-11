@@ -72,8 +72,8 @@ $("#Luke").on("click", function() {
 $("#Sidious").on("click", function() {
 
     $("#player").append($("#Sidious"));
-    $("#enemies").append($("#Luke"));
     $("#enemies").append($("#ObiWan"));
+    $("#enemies").append($("#Luke"));
     $("#enemies").append($("#Maul"));
     
   });
@@ -81,8 +81,8 @@ $("#Sidious").on("click", function() {
 $("#Maul").on("click", function() {
 
     $("#player").append($("#Maul"));
+    $("#enemies").append($("#ObiWan"));
     $("#enemies").append($("#Luke"));
     $("#enemies").append($("#Sidious"));
-    $("#enemies").append($("#ObiWan"));
     
   });
