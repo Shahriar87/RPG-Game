@@ -51,12 +51,17 @@ for (var i = 0; i < characters.length; i++) {
 
 
 
-$("#ObiWan").on("click", function() {
+var select = $("#ObiWan").one("click", function() {
 
     $("#player").append($("#ObiWan"));
     $("#enemies").append($("#Luke"));
     $("#enemies").append($("#Sidious"));
     $("#enemies").append($("#Maul"));
+
+    $("#Luke").on("click", function(){
+
+        $("#fight").append($("#Luke"))
+    })
     
   });
 
