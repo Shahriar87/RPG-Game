@@ -13,81 +13,97 @@ var obiWan = {
     healthPoints: 120,
     attackPower: 8,
     counterAttackPower: 10
-}
+};
 var lukeSkywalker = {
     healthPoints: 100,
     attackPower: 8,
     counterAttackPower: 5
-}
+};
 var dSidious = {
     healthPoints: 150,
     attackPower: 8,
     counterAttackPower: 20
-}
+};
 var dMaul= {
     healthPoints: 180,
     attackPower: 8,
     counterAttackPower: 25
-}
+};
+
+
+
+
+
+var dataPower = [obiWan, lukeSkywalker, dSidious, dMaul];
+
 
 for (var i = 0; i < characters.length; i++) {
 
-    // Inside the loop...
+    var characterBtn = $("<img>");     // Create image tags
 
-    // 2. Create image tags
-    var characterBtn = $("<img>");
-
-    // 3. adding attributes to the crystal images
+    // Adding attributes to the images
     characterBtn.attr("src", characters[i]);
     characterBtn.attr("id", characterIds[i]);
     characterBtn.attr("style", "height:150px; width: 200px");
     characterBtn.attr("alt", alt[i]);
+    characterBtn.addClass("image");
+    characterBtn.data("power", dataPower[i]);
 
-    
-    // 4. Finally, append each crystal images
-    $("#initialPosition").append(characterBtn);
+    $("#initialPosition").append(characterBtn);    // Finally, append each crystal images
 
   }
 
+var id;
+var id2;
 
+$(document).one("click", ".image", function(e) {
+    id = $(e.currentTarget).attr("id");
+    console.log(id);
 
-var select = $("#ObiWan").one("click", function() {
-
-    $("#player").append($("#ObiWan"));
-    $("#enemies").append($("#Luke"));
-    $("#enemies").append($("#Sidious"));
-    $("#enemies").append($("#Maul"));
-
-    $("#Luke").on("click", function(){
-
-        $("#fight").append($("#Luke"))
-    })
+  
+    $("#player").append($("#"+id));          // Selects the player
+    characterIds.forEach(function(character) {
+        if(id === character) {             // player is not enemy. So do nothing!
+        return;
+    }
     
-  });
+    $("#enemies").append($("#"+character));   // Selects the enemies
+    });
 
-$("#Luke").on("click", function() {
+    $(document).one("click", ".image", function(e) {
+        id2 = $(e.currentTarget).attr("id");
+        console.log(id2);
+        $("#defender").append($("#"+id2));
 
-    $("#player").append($("#Luke"));
-    $("#enemies").append($("#ObiWan"));
-    $("#enemies").append($("#Sidious"));
-    $("#enemies").append($("#Maul"));
+  })
+});
+
+
+$("#attack").on("click", function(e){
+
+    var idData = $("#"+id).data("power");
+    var id2Data = $("#"+id2).data("power");
+
+    idData.healthPoints -= id2Data.counterAttackPower;
+
+    id2Data.healthPoints -= idData.attackPower;
+
+    idData.attackPower = idData.attackPower * 2;
+
+    console.log(idData.healthPoints);
+    console.log(id2Data.healthPoints);
+    console.log(idData.attackPower);
+
+    checkResult();
+
+});
+
+function checkResult(){
+    var idData = $("#"+id).data("power");
+    var id2Data = $("#"+id2).data("power");
+
+        if (idData.healthPoints <= 0){
+        $("#result").html("You been defeated... GAME OVER!!!")
+    }
     
-  });
-
-$("#Sidious").on("click", function() {
-
-    $("#player").append($("#Sidious"));
-    $("#enemies").append($("#ObiWan"));
-    $("#enemies").append($("#Luke"));
-    $("#enemies").append($("#Maul"));
-    
-  });
-
-$("#Maul").on("click", function() {
-
-    $("#player").append($("#Maul"));
-    $("#enemies").append($("#ObiWan"));
-    $("#enemies").append($("#Luke"));
-    $("#enemies").append($("#Sidious"));
-    
-  });
+};
