@@ -12,6 +12,7 @@ body{
 
 .image {
     border: 10px green solid;
+    background-color:rgb(207, 204, 204);
 }
 
 .opponents{
@@ -30,3 +31,34 @@ h2{
 button{
     font-size: 18px;
 }
+
+/* 
+#ObiWan ::after{
+    content: "Obi-Wan";
+} */
+
+
+
+
+/* #ObiWan, #Luke, #Sidious, #Maul {
+    overflow: auto;
+    
+    z-index: -1;
+}
+
+.centered1{
+    position: absolute;
+}
+
+.centered2{
+    position: absolute;
+}
+
+.centered3{
+    position: absolute;
+}
+
+.centered4{
+    position: absolute;
+} */
+

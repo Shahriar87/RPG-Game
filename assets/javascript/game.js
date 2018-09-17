@@ -37,15 +37,23 @@ for (var i = 0; i < characters.length; i++) {
 
     // Adding attributes to the images
     characterBtn.attr("src", characters[i]);
-    characterBtn.attr("id", characterIds[i]);
+    // characterBtn.attr("id", characterIds[i]);
     characterBtn.attr("style", "height:150px; width: 200px");
     characterBtn.attr("alt", alt[i]);
-    characterBtn.addClass("image");
-    characterBtn.data("power", dataPower[i]);
+    // characterBtn.addClass("image");
+    // characterBtn.data("power", dataPower[i]);
 
     $("#initialPosition").append(characterBtn);    // Finally, append each crystal images
+    
+    characterBtn.wrap( "<div style= 'float: left; position: relative' class='image' id='"+ characterIds[i] + "'></div>" );
+    // characterBtn.wrap( "<div></div>" );
 
+    $("#"+characterIds[i]).append($("<h4 style='text-align:center'>"+alt[i]+"</h4>"));
+    $("#"+characterIds[i]).data("power", dataPower[i]);
+    $("#"+characterIds[i]).append($("<p style='text-align:center'>"+dataPower[i].healthPoints+"</p>"));
 }
+
+
 
 var id;
 var id2;
@@ -85,7 +93,7 @@ $(document).one("click", ".image", function(e) {
 
             var idData = $("#"+id).data("power");
             var id2Data = $("#"+id2).data("power");
-            var id2Character = $("#"+id2).attr("alt")
+            var id2Character = $("#"+id2+"> img").attr("alt")
             
             // console.log(idData);
             // console.log(id2Data);
@@ -100,6 +108,12 @@ $(document).one("click", ".image", function(e) {
             idData.healthPoints -= id2Data.counterAttackPower;
         
             id2Data.healthPoints -= idData.attackPower;
+
+            $("#"+id +"> p").html($("<p style='text-align:center'>"+idData.healthPoints+"</p>"));
+            $("#"+id2 +"> p").html($("<p style='text-align:center'>"+id2Data.healthPoints+"</p>"));
+
+
+
 
             console.log(idData.healthPoints);
             console.log(id2Data.healthPoints);
@@ -138,7 +152,7 @@ $(document).one("click", ".image", function(e) {
 
                 var idData = $("#"+id).data("power");
                 var id3Data = $("#"+id3).data("power");
-                var id3Character = $("#"+id3).attr("alt")
+                var id3Character = $("#"+id3+"> img").attr("alt")
                 
                 // console.log(idData);
                 // console.log(id3Data);
@@ -153,6 +167,10 @@ $(document).one("click", ".image", function(e) {
                 idData.healthPoints -= id3Data.counterAttackPower;
             
                 id3Data.healthPoints -= idData.attackPower;
+
+                $("#"+id +"> p").html($("<p style='text-align:center'>"+idData.healthPoints+"</p>"));
+                $("#"+id3 +"> p").html($("<p style='text-align:center'>"+id3Data.healthPoints+"</p>"));
+
 
                 console.log(idData.healthPoints);
                 console.log(id3Data.healthPoints);
@@ -190,7 +208,7 @@ $(document).one("click", ".image", function(e) {
 
                 var idData = $("#"+id).data("power");
                 var id4Data = $("#"+id4).data("power");
-                var id4Character = $("#"+id4).attr("alt")
+                var id4Character = $("#"+id4+"> img").attr("alt")
                 
                 // console.log(idData);
                 // console.log(id4Data);
@@ -206,9 +224,15 @@ $(document).one("click", ".image", function(e) {
             
                 id4Data.healthPoints -= idData.attackPower;
 
+                $("#"+id +"> p").html($("<p style='text-align:center'>"+idData.healthPoints+"</p>"));
+                $("#"+id4 +"> p").html($("<p style='text-align:center'>"+id4Data.healthPoints+"</p>"));
+
+
                 console.log(idData.healthPoints);
                 console.log(id4Data.healthPoints);
                 console.log(idData.attackPower);
+
+
             
                 $("#result").html("You attacked " + id4Character + " for " + idData.attackPower + " damage. <br>"
                 + id4Character + " attacked you back for " + id4Data.counterAttackPower + " damage.")
